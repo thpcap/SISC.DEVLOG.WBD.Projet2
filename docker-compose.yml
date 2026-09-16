@@ -9,24 +9,24 @@ services:
       - ./Frontend:/usr/local/apache2/htdocs:ro
     restart: unless-stopped
 
-  back1:
-    image: eclipse-temurin:17-jdk
-    container_name: mon-back1
+  Employe:
+    image: maven:3.9.16-eclipse-temurin-17
+    container_name: Employe
     working_dir: /app
     volumes:
-      - ./back/projet1:/app
-    command: ./mvnw spring-boot:run
+      - ./Backend/Employe:/app
+    command: mvn spring-boot:run
     ports:
       - "8081:8080"
     restart: unless-stopped
 
-  back2:
-    image: eclipse-temurin:17-jdk
-    container_name: mon-back2
+  Entreprise:
+    image: maven:3.9.16-eclipse-temurin-17
+    container_name: Entreprise
     working_dir: /app
     volumes:
-      - ./back/projet2:/app
-    command: ./mvnw spring-boot:run
+      - ./Backend/Entreprise:/app
+    command: mvn spring-boot:run
     ports:
-      - "8081:8080"
+      - "8080:8080"
     restart: unless-stopped
