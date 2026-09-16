@@ -1,0 +1,6 @@
+2026-09-11 20:12:44.697284+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]selesENTREPRISE"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
+selesENTREPRISE [42001-232]
+2026-09-11 20:12:47.682312+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]selesENTREPRISE"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
+selesENTREPRISE [42001-232]
