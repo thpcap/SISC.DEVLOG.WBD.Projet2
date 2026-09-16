@@ -42,17 +42,8 @@
                             <th scope="col"><span class="sr-only">Action</span></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="company-identity">
-                                    <img src="https://brandemia.org/contenido/subidas/2022/11/tipografia-y-paleta-de-color.png" alt="" class="company-logo">
-                                    <strong>Amazon</strong>
-                                </div>
-                            </td>
-                            <td><span class="category-badge">E-commerce</span></td>
-                            <td class="table-action"><a class="details-link" href="details.html">Voir les détails <span aria-hidden="true">→</span></a></td>
-                        </tr>
+                    <tbody id="tableBodyEntreprise">
+                       
                     </tbody>
                 </table>
             </div>
@@ -60,5 +51,10 @@
     </main>
 
     <footer><div class="container">Copyright © 2026 · Annuaire des entreprises</div></footer>
+    <script src="/JS/Entreprise.js"></script>
+    <script id="Conf">
+        var APILink = "http://localhost:8080/api/entreprises";
+        var DetailsPageLink ="details.html?id=";
+    </script>
 </body>
 </html>
