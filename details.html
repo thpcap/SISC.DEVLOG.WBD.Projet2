@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Consultez les employés et les informations de l'entreprise Amazon.">
+    <title>Détail de l’entreprise — Amazon</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav container" aria-label="Navigation principale">
+            <a class="brand" href="Entreprise.html"> Entreprises</a>
+            <a class="nav-link" href="Entreprise.html">Annuaire</a>
+        </nav>
+    </header>
+
+    <main class="container page-content">
+        <a class="back-link" href="Entreprise.html"><span aria-hidden="true">←</span> Retour à l’annuaire</a>
+
+        <section class="hero detail-hero">
+            <div class="company-title">
+                <div class="logo-frame"><span class="amazon-letter">a</span></div>
+                <div>
+                    <span class="eyebrow">E-commerce</span>
+                    <h1>Amazon</h1>
+                    <p class="description">Consultez l’équipe et ajoutez un nouveau collaborateur.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="details-grid">
+            <section class="card company" aria-labelledby="employees-title">
+                <div class="section-heading">
+                    <div><h2 id="employees-title">Employés</h2><p>2 membres dans l’équipe</p></div>
+                    <span class="count-badge">2</span>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th scope="col">Nom</th><th scope="col">Poste</th><th scope="col">Expérience</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Amina</strong></td><td>Manager</td><td>12 ans</td></tr>
+                            <tr><td><strong>Khadija</strong></td><td>Développeuse</td><td>3 ans</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="card form-section" aria-labelledby="form-title">
+                <div class="section-heading"><div><h2 id="form-title">Ajouter un employé</h2><p>Renseignez ses informations</p></div></div>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group"><label for="nom">Nom</label><input type="text" id="nom" name="nom" placeholder="Ex. Martin" required></div>
+                        <div class="form-group"><label for="prenom">Prénom</label><input type="text" id="prenom" name="prenom" placeholder="Ex. Léa" required></div>
+                    </div>
+                    <fieldset>
+                        <legend>Expérience professionnelle</legend>
+                        <label class="radio-option"><input type="radio" name="experience" value="-1an" required><span>Moins d’un an</span></label>
+                        <label class="radio-option"><input type="radio" name="experience" value="1-10ans"><span>Entre 1 et 10 ans</span></label>
+                        <label class="radio-option"><input type="radio" name="experience" value="+10ans"><span>Plus de 10 ans</span></label>
+                    </fieldset>
+                    <div class="form-group"><label for="message">Message <span class="optional">(facultatif)</span></label><textarea id="message" name="message" rows="4" placeholder="Ajoutez une note..."></textarea></div>
+                    <button type="submit">Ajouter l’employé <span aria-hidden="true">→</span></button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer><div class="container">Copyright © 2026 · Annuaire des entreprises</div></footer>
+</body>
+</html>
