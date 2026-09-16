@@ -1,19 +1,26 @@
 package tutoMicroservices.demo.Presentation;
 
 import java.util.List;
+import tutoMicroservices.demo.Application.Taille;
 
 public class CreationEntrepriseDTO {
     private int id;
     private String nom;
     private List<Integer> idEmployes;
+    private String secteur;
+    private String localisation;
+    private Taille taille;
 
     public CreationEntrepriseDTO(){}
 
-    public CreationEntrepriseDTO(int id, String nom, List<Integer> idEmployes) {
+    public CreationEntrepriseDTO(int id, String nom, List<Integer> idEmployes,
+                                 String secteur, String localisation, Taille taille) {
         this.id = id;
         this.nom = nom;
         this.idEmployes = idEmployes;
-
+        this.secteur = secteur;
+        this.localisation = localisation;
+        this.taille = taille;
     }
     public int getId() {
         return id;
@@ -32,5 +39,23 @@ public class CreationEntrepriseDTO {
     }
     public void setIdEmployes(List<Integer> idEmployes) {
         this.idEmployes = idEmployes;
+    }
+    public String getSecteur() {
+        return secteur;
+    }
+    public void setSecteur(String secteur) {
+        this.secteur = secteur;
+    }
+    public String getLocalisation() {
+        return localisation;
+    }
+    public void setLocalisation(String localisation) {
+        this.localisation = localisation;
+    }
+    public Taille getTaille() {
+        return taille;
+    }
+    public void setTaille(Taille taille) {
+        this.taille = taille;
     }
 }
