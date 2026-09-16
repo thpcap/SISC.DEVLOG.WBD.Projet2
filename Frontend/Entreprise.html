@@ -11,7 +11,6 @@
     <header class="site-header">
         <nav class="nav container" aria-label="Navigation principale">
             <a class="brand" href="Entreprise.html" aria-label="Accueil Entreprises">
-                
                 Entreprises
             </a>
             <a class="nav-link active" href="Entreprise.html" aria-current="page">Annuaire</a>
@@ -29,7 +28,7 @@
             <div class="section-heading">
                 <div>
                     <h2 id="companies-title">Tableau des entreprises</h2>
-                    <p>1 entreprise disponible</p>
+                    <p><span id="entreprisesNumber"></span> entreprises disponible</p>
                 </div>
             </div>
 
@@ -37,10 +36,25 @@
                 <table>
                     <thead>
                         <tr>
-                            <th scope="col">Entreprise</th>
-                            <th scope="col">Secteur</th>
+                            <th scope="col"><input type="text" name="" id="EntrepriseInput" oninput="reloadTable();" placeholder="Entreprise"></th>
+                            <th scope="col">
+                                <select name="Secteur" id="SecteurInput">
+                                    <option value="" selected>Secteur</option>
+                                </select>
+                            </th>
+                            <th scope="col">
+                                <select name="Taille" id="TailleInput">
+                                    <option value="" selected>Taille</option>
+                                </select>
+                            </th>
+                            <th scope="col">
+                                 <select name="Ville" id="VilleInput">
+                                    <option value="" selected>Ville</option>
+                                </select>
+                            </th>
                             <th scope="col"><span class="sr-only">Action</span></th>
                         </tr>
+                        
                     </thead>
                     <tbody id="tableBodyEntreprise">
                        
