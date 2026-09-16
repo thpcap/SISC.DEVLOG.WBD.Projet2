@@ -1,9 +1,32 @@
 services:
+
   web:
     image: httpd:2.4
     container_name: mon-apache
     ports:
-      - 8082:80
+      - "8082:80"
     volumes:
-      - ./Front:/usr/local/apache2/htdocs:ro
+      - ./Frontend:/usr/local/apache2/htdocs:ro
+    restart: unless-stopped
+
+  back1:
+    image: eclipse-temurin:17-jdk
+    container_name: mon-back1
+    working_dir: /app
+    volumes:
+      - ./back/projet1:/app
+    command: ./mvnw spring-boot:run
+    ports:
+      - "8081:8080"
+    restart: unless-stopped
+
+  back2:
+    image: eclipse-temurin:17-jdk
+    container_name: mon-back2
+    working_dir: /app
+    volumes:
+      - ./back/projet2:/app
+    command: ./mvnw spring-boot:run
+    ports:
+      - "8081:8080"
     restart: unless-stopped
