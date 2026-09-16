@@ -9,17 +9,19 @@ public class CreationEntrepriseDTO {
     private List<Integer> idEmployes;
     private String secteur;
     private String localisation;
+    private String url;
     private Taille taille;
 
     public CreationEntrepriseDTO(){}
 
     public CreationEntrepriseDTO(int id, String nom, List<Integer> idEmployes,
-                                 String secteur, String localisation, Taille taille) {
+                                 String secteur, String localisation, String url, Taille taille) {
         this.id = id;
         this.nom = nom;
         this.idEmployes = idEmployes;
         this.secteur = secteur;
         this.localisation = localisation;
+        this.url = url;
         this.taille = taille;
     }
     public int getId() {
@@ -51,6 +53,12 @@ public class CreationEntrepriseDTO {
     }
     public void setLocalisation(String localisation) {
         this.localisation = localisation;
+    }
+    public String getUrl() {
+        return url;
+    }
+    public void setUrl(String url) {
+        this.url = url;
     }
     public Taille getTaille() {
         return taille;

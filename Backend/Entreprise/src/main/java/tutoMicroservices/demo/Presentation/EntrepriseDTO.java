@@ -9,14 +9,16 @@ public class EntrepriseDTO {
     private List<EmployeDTO> employes;
     private String secteur;
     private String localisation;
+    private String url;
     private Taille taille;
 
     public EntrepriseDTO() {}
-    public EntrepriseDTO(int id, String nom, String secteur, String localisation, Taille taille) {
+    public EntrepriseDTO(int id, String nom, String secteur, String localisation, String url, Taille taille) {
         this.id = id;
         this.nom = nom;
         this.secteur = secteur;
         this.localisation = localisation;
+        this.url = url;
         this.taille = taille;
     }
     public EntrepriseDTO(int id, String nom, List<EmployeDTO> employes) {
@@ -56,6 +58,12 @@ public class EntrepriseDTO {
     }
     public void setLocalisation(String localisation) {
         this.localisation = localisation;
+    }
+    public String getUrl() {
+        return url;
+    }
+    public void setUrl(String url) {
+        this.url = url;
     }
     public Taille getTaille() {
         return taille;
