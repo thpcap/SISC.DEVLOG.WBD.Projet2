@@ -10,14 +10,26 @@ public class Entreprise {
     private int id;
     private String nom;
     private List<Integer> idEmployes;
-
+    private String secteur;
+    private String localisation;
+    private String url;
+    @Enumerated(EnumType.STRING)
+    private Taille taille;
+   
     public Entreprise(){}
 
-    public Entreprise(int id, String nom,List<Integer> idEmployes) {
+    public Entreprise(int id, String nom, List<Integer> idEmployes, String secteur,
+                      String localisation, String url, Taille taille) {
         this.id = id;
         this.nom = nom;
         this.idEmployes = idEmployes;
+        this.secteur= secteur;
+        this.localisation= localisation;
+        this.url = url;
+        this.taille= taille;
+
     }
+
     public int getId() {
         return id;
     }
@@ -35,5 +47,31 @@ public class Entreprise {
     }
     public void setIdEmployes(List<Integer> idEmployes) {
         this.idEmployes = idEmployes;
+    }
+
+    public Taille getTaille() {
+        return taille;
+    }
+    public void setTaille(Taille taille) {
+        this.taille = taille;
+    }
+    public String getSecteur() {
+        return secteur;
+    }
+    public void setSecteur(String secteur) {
+        this.secteur = secteur;
+    }
+    public String getLocalisation() {
+        return localisation;
+    }
+
+    public void setLocalisation(String localisation) {
+        this.localisation = localisation;
+    }
+    public String getUrl() {
+        return url;
+    }
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

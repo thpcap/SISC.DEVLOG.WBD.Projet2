@@ -10,10 +10,13 @@ import java.util.List;
 public class EntrepriseMapper {
 
     public EntrepriseDTO mapEntrepriseToEntrepriseDTO(Entreprise entreprise){
-        return new EntrepriseDTO(entreprise.getId(), entreprise.getNom());
+        return new EntrepriseDTO(entreprise.getId(), entreprise.getNom(), entreprise.getSecteur(),
+                entreprise.getLocalisation(), entreprise.getUrl(), entreprise.getTaille());
     }
     public Entreprise mapEntrepriseDTOToEntreprise(CreationEntrepriseDTO entrepriseDTO){
-        return new Entreprise(entrepriseDTO.getId(),entrepriseDTO.getNom(),entrepriseDTO.getIdEmployes());
+        return new Entreprise(entrepriseDTO.getId(), entrepriseDTO.getNom(), entrepriseDTO.getIdEmployes(),
+                entrepriseDTO.getSecteur(), entrepriseDTO.getLocalisation(), entrepriseDTO.getUrl(),
+                entrepriseDTO.getTaille());
     }
 
     public List<EmployeDTO> mapEmployeDAOToEmployeDTO(List<EmployeDAO> employes) {
