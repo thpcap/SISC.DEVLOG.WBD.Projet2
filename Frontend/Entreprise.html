@@ -36,7 +36,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th scope="col"><input type="text" name="" id="EntrepriseInput" oninput="reloadTable();" placeholder="Entreprise"></th>
+                            <th scope="col"><input type="text" name="" id="EntrepriseInput" oninput="filter();" placeholder="Entreprise"></th>
                             <th scope="col">
                                 <select name="Secteur" id="SecteurInput">
                                     <option value="" selected>Secteur</option>
@@ -52,7 +52,7 @@
                                     <option value="" selected>Ville</option>
                                 </select>
                             </th>
-                            <th scope="col"><span class="sr-only">Action</span></th>
+                            <th scope="col"><button onclick="reloadTable()">Rechercher</button><span class="sr-only">Action</span></th>
                         </tr>
                         
                     </thead>
@@ -65,10 +65,7 @@
     </main>
 
     <footer><div class="container">Copyright © 2026 · Annuaire des entreprises</div></footer>
-    <script src="/JS/Entreprise.js"></script>
-    <script id="Conf">
-        var APILink = "http://localhost:8080/api/entreprises";
-        var DetailsPageLink ="details.html?id=";
-    </script>
+    <script src="JS/Entreprise.js"></script>
+    <script src="JS/conf.js"></script>
 </body>
 </html>
