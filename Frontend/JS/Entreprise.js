@@ -19,7 +19,7 @@ function reloadTable(){
                 let row = document.createElement("tr");
                 row.innerHTML=` 
                 <td>
-                    <div class="company-identity" data-name="`entrreprise.nom`">
+                    <div class="company-identity" data-name="`+entrreprise.nom+`">
                         <img src="https://brandemia.org/contenido/subidas/2022/11/tipografia-y-paleta-de-color.png" alt="" class="company-logo">
                         <strong>`+entrreprise.nom+`</strong>
                     </div>
@@ -39,18 +39,34 @@ function reloadTable(){
 }
 document.addEventListener("DOMContentLoaded",function(){
     reloadTable();
+    filter();
 });
 
 
+//cache les entreprises qui ne correspondent pas à la recherche
+function filter() {
 
-function filter(int){
-     //filter
     let nameSearch = entrepriseInput.value;
-    if(nameSearch.length!=0){
-        let regex=new RegExp(nameSearch+"*", "gmi")
-        data=data.filter(ent=>{
-            let res =regex.test(ent.nom);
-            return res;
+    if(nameSearch.length>0){
+        let entreprises = tableBodyEntreprise.children;
+
+        let regex = new RegExp(nameSearch+"*", "gmi");
+
+        Array.from(entreprises).forEach(entreprise => {
+
+            let nom = entreprise
+                .querySelector(".company-identity")
+                .getAttribute("data-name");
+
+            let res = regex.test(nom);
+
+            if (!res) {
+                entreprise.style.display = "none";
+            } else {
+                entreprise.style.display = "";
+            }
         });
     }
 }
+
+
