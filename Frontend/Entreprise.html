@@ -52,7 +52,7 @@
                                     <option value="" selected>Ville</option>
                                 </select>
                             </th>
-                            <th scope="col"><span class="sr-only">Action</span></th>
+                            <th scope="col"><button onclick="reloadTable()">Rechercher</button><span class="sr-only">Action</span></th>
                         </tr>
                         
                     </thead>
@@ -67,7 +67,7 @@
     <footer><div class="container">Copyright © 2026 · Annuaire des entreprises</div></footer>
     <script src="/JS/Entreprise.js"></script>
     <script id="Conf">
-        var APILink = "http://localhost:8080/api/entreprises";
+        var APILink = "http://localhost:8080/api/";
         var DetailsPageLink ="details.html?id=";
     </script>
 </body>
