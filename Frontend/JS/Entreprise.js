@@ -1,24 +1,51 @@
 const tableBodyEntreprise = document.getElementById("tableBodyEntreprise");
 const entreprisesNumber = document.getElementById("entreprisesNumber");
 const entrepriseInput = document.getElementById("EntrepriseInput");
+const SecteurInput= document.getElementById("SecteurInput");
+const TailleInput= document.getElementById("TailleInput");
+const VilleInput= document.getElementById("VilleInput");
+
 function reloadTable(){
-    let data;
-    fetch(APILink, {}).then((response)=>{
+    let secteursValue = SecteurInput.value;
+    let tailleValue = TailleInput.value;
+    let villeValue = VilleInput.value;
+
+    let entreprisesLink = APILink + "entreprises";
+
+    if (secteursValue != '' || tailleValue != '' || villeValue != '') {
+
+        entreprisesLink += "/search?";
+
+        if (secteursValue != '') {
+            entreprisesLink += "secteurs=" + encodeURIComponent(secteursValue);
+        }
+
+        if (tailleValue != '') {
+
+            if (secteursValue != '') {
+                entreprisesLink += "&";
+            }
+
+            entreprisesLink += "taille=" + encodeURIComponent(tailleValue);
+        }
+
+        if (villeValue != '') {
+
+            if (secteursValue != '' || tailleValue != '') {
+                entreprisesLink += "&";
+            }
+
+            entreprisesLink += "ville=" + encodeURIComponent(villeValue);
+        }
+    }
+    //chargement de la liste des entreprises
+    fetch(entreprisesLink, {}).then((response)=>{
         if (!response.ok) {
             throw new Error(`HTTP error: ${response.status}`);
         }
         return response.json();
     })
     .then(data=>{
-        //filter
-        let nameSearch = entrepriseInput.value;
-        if(nameSearch.length!=0){
-            let regex=new RegExp(nameSearch+"*", "g")
-            data=data.filter(ent=>{
-                let res =regex.test(ent.nom);
-                return res;
-            });
-        }
         //emptyTable
         tableBodyEntreprise.innerHTML="";
         //reloadTable
@@ -28,7 +55,7 @@ function reloadTable(){
                 let row = document.createElement("tr");
                 row.innerHTML=` 
                 <td>
-                    <div class="company-identity">
+                    <div class="company-identity" data-name="`+entrreprise.nom+`">
                         <img src="https://brandemia.org/contenido/subidas/2022/11/tipografia-y-paleta-de-color.png" alt="" class="company-logo">
                         <strong>`+entrreprise.nom+`</strong>
                     </div>
@@ -44,8 +71,77 @@ function reloadTable(){
     }).catch(error=>{
         console.error(error);
     });
-    //APIlink is in the page
+    //ajout des filtres sur les inputs de recherche avencée
+    fetch("/Filters.json", {}).then((response)=>{
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data=>{
+        // On remet les options par défaut
+        SecteurInput.innerHTML = '<option value="" selected>Secteur</option>';
+        TailleInput.innerHTML = '<option value="" selected>Taille</option>';
+        VilleInput.innerHTML = '<option value="" selected>Ville</option>';
+        
+        data.secteurs.forEach(txt=>{
+            let row = document.createElement("option");
+            row.setAttribute("value",txt);
+            row.innerText=txt;
+            SecteurInput.append(row);
+        });
+
+        data.tailles.forEach(txt=>{
+            let row = document.createElement("option");
+            row.setAttribute("value",txt);
+            row.innerText=txt;
+            TailleInput.append(row);
+        });
+
+        data.localisations.forEach(txt=>{
+            let row = document.createElement("option");
+            row.setAttribute("value",txt);
+            row.innerText=txt;
+            VilleInput.append(row);
+        });
+
+    }).catch(error=>{
+        console.error(error);
+    });
 }
 document.addEventListener("DOMContentLoaded",function(){
     reloadTable();
+    filter();
 });
+
+
+//cache les entreprises qui ne correspondent pas à la recherche
+function filter() {
+    let nameSearch = entrepriseInput.value;
+    if(nameSearch.length>0){
+        let entreprises = tableBodyEntreprise.children;
+        let nb_entreprises=0;
+
+        let regex = new RegExp(nameSearch+"*", "gmi");
+
+        Array.from(entreprises).forEach(entreprise => {
+
+            let nom = entreprise
+                .querySelector(".company-identity")
+                .getAttribute("data-name");
+
+            let res = regex.test(nom);
+
+            if (!res) {
+                entreprise.style.display = "none";
+            } else {
+                nb_entreprises++;
+                entreprise.style.display = "";
+            }
+        });
+        entreprisesNumber.innerText=nb_entreprises;
+
+    }
+}
+
+
