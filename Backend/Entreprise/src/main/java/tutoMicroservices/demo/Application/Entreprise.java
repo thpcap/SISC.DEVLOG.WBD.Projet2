@@ -1,21 +1,38 @@
 package tutoMicroservices.demo.Application;
 
 import java.util.List;
-import jakarta.persistence.*;
+
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PostPersist;
+import jakarta.persistence.PostRemove;
+import jakarta.persistence.PostUpdate;
+import tutoMicroservices.demo.Infrastucture.JsonFileWriter;
 
 @Entity
+@EntityListeners(EntrepriseEntityListener.class)
 public class Entreprise {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String nom;
+
+    @ElementCollection
     private List<Integer> idEmployes;
+
     private String secteur;
     private String localisation;
     private String url;
+
     @Enumerated(EnumType.STRING)
     private Taille taille;
-   
+
     public Entreprise(){}
 
     public Entreprise(int id, String nom, List<Integer> idEmployes, String secteur,
@@ -27,7 +44,6 @@ public class Entreprise {
         this.localisation= localisation;
         this.url = url;
         this.taille= taille;
-
     }
 
     public int getId() {
@@ -73,5 +89,16 @@ public class Entreprise {
     }
     public void setUrl(String url) {
         this.url = url;
+    }
+}
+
+// Écouteur JPA
+class EntrepriseEntityListener {
+
+    @PostPersist
+    @PostUpdate
+    @PostRemove
+    public void onPostSave(Entreprise entreprise) {
+        JsonFileWriter.exporterJson();
     }
 }

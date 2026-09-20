@@ -1,0 +1,5 @@
+{
+  "localisations" : [ "Clichy", "Bordeaux", "Saint-Cloud", "Boulogne-Billancourt", "Marseille", "Évry", "Nancy", "Croix", "Limoges", "Meudon", "Massy", "Colombes", "Grenoble", "Courbevoie", "Aubervilliers", "Saint-Denis", "Pessac", "Roissy-en-France", "Issy-les-Moulineaux", "Roubaix", "Saint-Ouen", "Nantes", "Rueil-Malmaison", "Nanterre", "Lyon", "Toulouse", "Villeneuve-d'Ascq", "Montpellier", "Charenton-le-Pont", "Bezons", "Clermont-Ferrand", "Montrouge", "Vélizy-Villacoublay", "Paris", "Poissy" ],
+  "tailles" : [ "TGE", "TPE", "PME" ],
+  "secteurs" : [ "Assurance", "Cosmétique", "Bâtiment", "Santé", "Marketing", "Industrie", "Aéronautique", "Environnement", "Automobile", "Défense & Sécurité", "Artisanat", "Finance", "Mode", "Électronique", "Restauration", "Télécommunications", "Éducation", "Immobilier", "Énergie", "Services", "Divertissement", "Luxe", "Agroalimentaire", "Informatique", "Distribution", "Conseil", "Chimie", "Transport" ]
+}

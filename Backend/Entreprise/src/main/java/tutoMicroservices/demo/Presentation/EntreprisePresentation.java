@@ -1,12 +1,17 @@
 package tutoMicroservices.demo.Presentation;
 
-
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.ws.rs.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.Response;
 import tutoMicroservices.demo.Application.EmployeDAO;
 import tutoMicroservices.demo.Application.Entreprise;
 import tutoMicroservices.demo.Application.EntrepriseService;
@@ -43,6 +48,21 @@ public class EntreprisePresentation {
         } 
         return entreprisesRetournees; 
     } 
+
+    @GET
+    @Path("json")
+    @Produces("application/json")
+    public Response getEntreprisesJson() {
+        File file = new File("src/main/resources/entreprises.json");
+
+        if (!file.exists()) {
+            return Response.status(Response.Status.NOT_FOUND)
+                           .entity("{\"erreur\": \"Fichier JSON introuvable\"}")
+                           .build();
+        }
+
+        return Response.ok(file).build();
+    }
     //verbe de création
     @POST
     //permet de dire que le webservice attend un json avec la requête
