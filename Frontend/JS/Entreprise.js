@@ -56,13 +56,13 @@ function reloadTable(){
                 row.innerHTML=` 
                 <td>
                     <div class="company-identity" data-name="`+entrreprise.nom+`">
-                        <img src="https://brandemia.org/contenido/subidas/2022/11/tipografia-y-paleta-de-color.png" alt="" class="company-logo">
+                        <img src="`+entrreprise.url+`" alt="" class="company-logo">
                         <strong>`+entrreprise.nom+`</strong>
                     </div>
                 </td>
-                <td><span class="category-badge">E-commerce</span></td>
-                <td><span class="size-badge">TGE</span></td>
-                <td><span class="city-badge">Villneuved'asq</span></td>
+                <td><span class="category-badge">` +entrreprise.secteur+`</span></td>
+                <td><span class="size-badge">`+ entrreprise.taille+`</span></td>
+                <td><span class="city-badge">`+entrreprise.localisation+`</span></td>
                 <td class="table-action"><a class="details-link" href="`+DetailsPageLink+entrreprise.id+`">Voir les détails <span aria-hidden="true">→</span></a></td>`
                 tableBodyEntreprise.append(row);
             });
