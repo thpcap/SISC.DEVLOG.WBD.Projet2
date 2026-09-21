@@ -129,3 +129,16 @@ INSERT INTO entreprise (NOM, LOCALISATION, SECTEUR, TAILLE, ID_EMPLOYES, URL) VA
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ENTRPRISE" non trouvée
 Table "ENTRPRISE" not found; SQL statement:
 select * from entrprise [42102-232]
+2026-09-21 10:51:04.774244+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "select * from entreprise\000d\000aUPDATE [*]ENTREPRISE \000d\000aSET URL = 'https://images.seeklogo.com/logo-png/45/1/danone-logo-png_seeklogo-451914.png' \000d\000aWHERE ID = 21"
+Syntax error in SQL statement "select * from entreprise\000d\000aUPDATE [*]ENTREPRISE \000d\000aSET URL = 'https://images.seeklogo.com/logo-png/45/1/danone-logo-png_seeklogo-451914.png' \000d\000aWHERE ID = 21"; SQL statement:
+select * from entreprise
+UPDATE ENTREPRISE 
+SET URL = 'https://images.seeklogo.com/logo-png/45/1/danone-logo-png_seeklogo-451914.png' 
+WHERE ID = 21 [42000-232]
+2026-09-21 10:55:54.216163+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "UPDATE ENTREPRISE \000d\000aSET URL = [*]'https://upload.wikimedia.org/wikipedia/fr/3/3b/Logo_Carrefour.svg?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original \000d\000aWHERE ID = 30;"
+Syntax error in SQL statement "UPDATE ENTREPRISE \000d\000aSET URL = [*]'https://upload.wikimedia.org/wikipedia/fr/3/3b/Logo_Carrefour.svg?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original \000d\000aWHERE ID = 30;"; SQL statement:
+UPDATE ENTREPRISE 
+SET URL = 'https://upload.wikimedia.org/wikipedia/fr/3/3b/Logo_Carrefour.svg?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original 
+WHERE ID = 30; [42000-232]
