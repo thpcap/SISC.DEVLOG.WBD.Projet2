@@ -19,11 +19,33 @@ public class EntreprisePresentation {
 
        @GET 
     @Produces("application/json") 
-    public List<EntrepriseDTO> getEntreprises(){ 
+    public List<EntrepriseDTO> getEntreprises(){
+        return mapEntreprises(service.getEntreprises());
+    }
+
+    @GET
+    @Path("search")
+    @Produces("application/json")
+    public List<EntrepriseDTO> rechercherEntreprises(
+            @QueryParam("secteurs") String secteurs,
+            @QueryParam("taille") String taille,
+            @QueryParam("ville") String ville) {
+        return mapEntreprises(service.rechercherEntreprises(secteurs, taille, ville));
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces("application/json")
+    public EntrepriseDTO getEntrepriseById(@PathParam("id") int id) {
+        Entreprise entreprise = service.getEntrepriseById(id)
+                .orElseThrow(() -> new NotFoundException("Entreprise introuvable : " + id));
+        return mapEntreprises(List.of(entreprise)).get(0);
+    }
+
+    private List<EntrepriseDTO> mapEntreprises(List<Entreprise> entreprisesBdd) {
         //ne pas oublier de mapper les données :)  
         EntrepriseMapper em = new EntrepriseMapper(); 
         //on récupère toutes les entreprises  
-        List<Entreprise> entreprisesBdd = service.getEntreprises(); 
         //cette liste nous sert d'objet de retour 
         List<EntrepriseDTO> entreprisesRetournees = new ArrayList<>(); 
         //dans cette partie, on transforme les données en EntrepriseDTO 
