@@ -10,15 +10,41 @@ public class EntrepriseDTO {
     private String secteur;
     private String localisation;
     private String url;
+    private String avantages;
+    private String description;
+    private int nbEmployes;
+    private double noteSatisfaction;
+    private double scoreRse;
+    private String chiffreAffaires;
+    private int dateCreation;
+    private int nbAgences;
+    private String paysPresents;
+    private String siteWeb;
+    private String lienPostuler;
     private Taille taille;
 
     public EntrepriseDTO() {}
-    public EntrepriseDTO(int id, String nom, String secteur, String localisation, String url, Taille taille) {
+    public EntrepriseDTO(int id, String nom, String secteur, String localisation, String url,
+                          String avantages, String description, int nbEmployes,
+                          double noteSatisfaction, double scoreRse, String chiffreAffaires,
+                          int dateCreation, int nbAgences, String paysPresents,
+                          String siteWeb, String lienPostuler, Taille taille) {
         this.id = id;
         this.nom = nom;
         this.secteur = secteur;
         this.localisation = localisation;
         this.url = url;
+        this.avantages = avantages;
+        this.description = description;
+        this.nbEmployes = nbEmployes;
+        this.noteSatisfaction = noteSatisfaction;
+        this.scoreRse = scoreRse;
+        this.chiffreAffaires = chiffreAffaires;
+        this.dateCreation = dateCreation;
+        this.nbAgences = nbAgences;
+        this.paysPresents = paysPresents;
+        this.siteWeb = siteWeb;
+        this.lienPostuler = lienPostuler;
         this.taille = taille;
     }
     public EntrepriseDTO(int id, String nom, List<EmployeDTO> employes) {
@@ -65,6 +91,28 @@ public class EntrepriseDTO {
     public void setUrl(String url) {
         this.url = url;
     }
+    public String getAvantages() { return avantages; }
+    public void setAvantages(String avantages) { this.avantages = avantages; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+    public int getNbEmployes() { return nbEmployes; }
+    public void setNbEmployes(int nbEmployes) { this.nbEmployes = nbEmployes; }
+    public double getNoteSatisfaction() { return noteSatisfaction; }
+    public void setNoteSatisfaction(double noteSatisfaction) { this.noteSatisfaction = noteSatisfaction; }
+    public double getScoreRse() { return scoreRse; }
+    public void setScoreRse(double scoreRse) { this.scoreRse = scoreRse; }
+    public String getChiffreAffaires() { return chiffreAffaires; }
+    public void setChiffreAffaires(String chiffreAffaires) { this.chiffreAffaires = chiffreAffaires; }
+    public int getDateCreation() { return dateCreation; }
+    public void setDateCreation(int dateCreation) { this.dateCreation = dateCreation; }
+    public int getNbAgences() { return nbAgences; }
+    public void setNbAgences(int nbAgences) { this.nbAgences = nbAgences; }
+    public String getPaysPresents() { return paysPresents; }
+    public void setPaysPresents(String paysPresents) { this.paysPresents = paysPresents; }
+    public String getSiteWeb() { return siteWeb; }
+    public void setSiteWeb(String siteWeb) { this.siteWeb = siteWeb; }
+    public String getLienPostuler() { return lienPostuler; }
+    public void setLienPostuler(String lienPostuler) { this.lienPostuler = lienPostuler; }
     public Taille getTaille() {
         return taille;
     }
