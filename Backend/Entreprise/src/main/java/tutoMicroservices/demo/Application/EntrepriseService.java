@@ -1,6 +1,9 @@
 package tutoMicroservices.demo.Application;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
@@ -24,11 +27,43 @@ public class EntrepriseService {
         //retourne toutes les entreprises contenues en bdd
     }
 
+    public Optional<Entreprise> getEntrepriseById(int id) {
+        return repo.findById(id);
+    }
+
+    public List<Entreprise> rechercherEntreprises(String secteurs, String taille, String ville) {
+        String secteurRecherche = normaliser(secteurs);
+        String tailleRecherche = normaliser(taille);
+        String villeRecherche = normaliser(ville);
+
+        return repo.findAll().stream()
+                .filter(entreprise -> secteurRecherche == null
+                        || correspond(entreprise.getSecteur(), secteurRecherche))
+                .filter(entreprise -> tailleRecherche == null
+                        || (entreprise.getTaille() != null
+                        && correspond(entreprise.getTaille().name(), tailleRecherche)))
+                .filter(entreprise -> villeRecherche == null
+                        || correspond(entreprise.getLocalisation(), villeRecherche))
+                .collect(Collectors.toList());
+    }
+
+    private String normaliser(String valeur) {
+        if (valeur == null || valeur.isBlank()) {
+            return null;
+        }
+        return valeur.trim().toLowerCase(Locale.ROOT);
+    }
+
+    private boolean correspond(String valeurEntreprise, String valeurRecherche) {
+        return valeurEntreprise != null
+                && valeurEntreprise.toLowerCase(Locale.ROOT).equals(valeurRecherche);
+    }
+
     public List<EmployeDAO> getEmployes(List<Integer> idEmployes) {
         Client client = ClientBuilder.newClient();
 
         try {
-            WebTarget target = client.target("http://Employe:8081/api/employes");
+            WebTarget target = client.target("http://localhost:8081/api/employes");
 
             for (Integer id : idEmployes) {
                 target = target.queryParam("idEmployes", id);
