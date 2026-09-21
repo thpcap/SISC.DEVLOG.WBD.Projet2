@@ -6,6 +6,7 @@ const TailleInput= document.getElementById("TailleInput");
 const VilleInput= document.getElementById("VilleInput");
 
 function reloadTable(){
+    //recupération des valeurs de recherche
     let secteursValue = SecteurInput.value;
     let tailleValue = TailleInput.value;
     let villeValue = VilleInput.value;
@@ -17,7 +18,7 @@ function reloadTable(){
     };
 
     let entreprisesLink = APILink + "entreprises";
-
+    //ajout de la recherche (si valeurs de recherche-> utilisation de l'endpoint /enreprises/search sinon symplement /entreprises)
     if (secteursValue != '' || tailleValue != '' || villeValue != '') {
 
         entreprisesLink += "/search?";
@@ -56,10 +57,13 @@ function reloadTable(){
         tableBodyEntreprise.innerHTML="";
         //reloadTable
         if(data.length!=0){
+            //ajout des lignes des entreprises dans le tableau
             data.forEach(entrreprise => {
+                //recupération du filtre
                 dataFiltres.secteurs.push(entrreprise.secteur);
                 dataFiltres.localisations.push(entrreprise.localisation);
                 dataFiltres.tailles.push(entrreprise.taille);
+                //création et ajout de la ligne
                 let row = document.createElement("tr");
                 row.innerHTML=` 
                 <td>
@@ -74,6 +78,9 @@ function reloadTable(){
                 <td class="table-action"><a class="details-link" href="`+DetailsPageLink+entrreprise.id+`">Voir les détails <span aria-hidden="true">→</span></a></td>`
                 tableBodyEntreprise.append(row);
             });
+            entreprisesNumber.innerText=data.length;
+
+            //comptage du nombre d'entreprises qui valide un filtre
             let compteSecteurs = {};
             let compteLocalisations = {};
             let compteTailles = {};
@@ -89,8 +96,7 @@ function reloadTable(){
             dataFiltres.tailles.forEach(taille => {
                 compteTailles[taille] = (compteTailles[taille] || 0) + 1;
             });
-            entreprisesNumber.innerText=data.length;
-
+            //supression des doublons dans les filtres
             dataFiltres.secteurs = [...new Set(dataFiltres.secteurs)];
             dataFiltres.localisations = [...new Set(dataFiltres.localisations)];
             dataFiltres.tailles = [...new Set(dataFiltres.tailles)];
@@ -98,7 +104,13 @@ function reloadTable(){
 
             console.debug(data);
 
+            // On remet les options par défaut
 
+            SecteurInput.innerHTML = '<option value="" selected>Secteur</option>';
+            TailleInput.innerHTML = '<option value="" selected>Taille</option>';
+            VilleInput.innerHTML = '<option value="" selected>Ville</option>';
+
+            //ajout des filtres de secteurs
             data.secteurs.forEach(txt => {
 
                 let row = document.createElement("option");
@@ -113,6 +125,7 @@ function reloadTable(){
                 SecteurInput.append(row);
             });
 
+            //ajout des filtres de tailles
             data.tailles.forEach(txt => {
 
                 let row = document.createElement("option");
@@ -126,7 +139,7 @@ function reloadTable(){
 
                 TailleInput.append(row);
             });
-
+            //ajout des filtres de localisation
             data.localisations.forEach(txt => {
 
                 let row = document.createElement("option");
@@ -210,7 +223,7 @@ function filter() {
         let entreprises = tableBodyEntreprise.children;
         let nb_entreprises=0;
 
-        let regex = new RegExp(nameSearch+"*", "gmi");
+        let regex = new RegExp("*"+nameSearch+"*", "gmi");
 
         Array.from(entreprises).forEach(entreprise => {
 
