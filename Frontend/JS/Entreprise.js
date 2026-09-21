@@ -10,6 +10,12 @@ function reloadTable(){
     let tailleValue = TailleInput.value;
     let villeValue = VilleInput.value;
 
+    let dataFiltres = {
+        secteurs: [],
+        localisations: [],
+        tailles: []
+    };
+
     let entreprisesLink = APILink + "entreprises";
 
     if (secteursValue != '' || tailleValue != '' || villeValue != '') {
@@ -51,7 +57,9 @@ function reloadTable(){
         //reloadTable
         if(data.length!=0){
             data.forEach(entrreprise => {
-                console.debug(entrreprise);
+                dataFiltres.secteurs.push(entrreprise.secteur);
+                dataFiltres.localisations.push(entrreprise.localisation);
+                dataFiltres.tailles.push(entrreprise.taille);
                 let row = document.createElement("tr");
                 row.innerHTML=` 
                 <td>
@@ -68,17 +76,11 @@ function reloadTable(){
             });
         }
         entreprisesNumber.innerText=data.length;
-    }).catch(error=>{
-        console.error(error);
-    });
-    //ajout des filtres sur les inputs de recherche avencée
-    fetch("/Filters.json", {}).then((response)=>{
-        if (!response.ok) {
-            throw new Error(`HTTP error: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data=>{
+        dataFiltres.secteurs = [...new Set(dataFiltres.secteurs)];
+        dataFiltres.localisations = [...new Set(dataFiltres.localisations)];
+        dataFiltres.tailles = [...new Set(dataFiltres.tailles)];
+        data = dataFiltres;
+        console.debug(data);
         // On remet les options par défaut
         SecteurInput.innerHTML = '<option value="" selected>Secteur</option>';
         TailleInput.innerHTML = '<option value="" selected>Taille</option>';
@@ -86,6 +88,9 @@ function reloadTable(){
         
         data.secteurs.forEach(txt=>{
             let row = document.createElement("option");
+            if(txt==secteursValue){
+                row.setAttribute("selected",true);
+            }
             row.setAttribute("value",txt);
             row.innerText=txt;
             SecteurInput.append(row);
@@ -93,6 +98,9 @@ function reloadTable(){
 
         data.tailles.forEach(txt=>{
             let row = document.createElement("option");
+            if(txt==tailleValue){
+                row.setAttribute("selected",true);
+            }
             row.setAttribute("value",txt);
             row.innerText=txt;
             TailleInput.append(row);
@@ -100,6 +108,58 @@ function reloadTable(){
 
         data.localisations.forEach(txt=>{
             let row = document.createElement("option");
+            if(txt==villeValue){
+                row.setAttribute("selected",true);
+            }
+            row.setAttribute("value",txt);
+            row.innerText=txt;
+            VilleInput.append(row);
+        });
+    }).catch(error=>{
+        console.error(error);
+    });
+
+    
+    //ajout des filtres sur les inputs de recherche avencée
+    /*fetch("/Filters.json", {}).then((response)=>{
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data=>{
+        data = dataFiltres;
+        console.debug(data);
+        // On remet les options par défaut
+        SecteurInput.innerHTML = '<option value="" selected>Secteur</option>';
+        TailleInput.innerHTML = '<option value="" selected>Taille</option>';
+        VilleInput.innerHTML = '<option value="" selected>Ville</option>';
+        
+        data.secteurs.forEach(txt=>{
+            let row = document.createElement("option");
+            if(txt==secteursValue){
+                row.setAttribute("selected",true);
+            }
+            row.setAttribute("value",txt);
+            row.innerText=txt;
+            SecteurInput.append(row);
+        });
+
+        data.tailles.forEach(txt=>{
+            let row = document.createElement("option");
+            if(txt==tailleValue){
+                row.setAttribute("selected",true);
+            }
+            row.setAttribute("value",txt);
+            row.innerText=txt;
+            TailleInput.append(row);
+        });
+
+        data.localisations.forEach(txt=>{
+            let row = document.createElement("option");
+            if(txt==villeValue){
+                row.setAttribute("selected",true);
+            }
             row.setAttribute("value",txt);
             row.innerText=txt;
             VilleInput.append(row);
@@ -107,7 +167,7 @@ function reloadTable(){
 
     }).catch(error=>{
         console.error(error);
-    });
+    });*/
 }
 document.addEventListener("DOMContentLoaded",function(){
     reloadTable();

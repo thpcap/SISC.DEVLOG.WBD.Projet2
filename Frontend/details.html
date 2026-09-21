@@ -514,20 +514,19 @@
         <section class="kpi-row">
             <div class="kpi-block">
                 <div class="kpi-label">Chiffre d’affaires</div>
-                <div class="kpi-data">574,8 Md$</div>
-                <div class="kpi-caption">+12% vs exercice précédent</div>
+                <div class="kpi-data" id="chiffreDAffaires">574,8 Md$</div>
             </div>
 
             <div class="kpi-block">
                 <div class="kpi-label">Effectifs globaux</div>
-                <div class="kpi-data">1 525 000</div>
+                <div class="kpi-data" id="nbEmployes"></div>
                 <div class="kpi-caption">Salariés dans le monde</div>
             </div>
 
             <div class="kpi-block">
                 <div class="kpi-label">Satisfaction Collaborateur</div>
                 <div class="kpi-data" style="color: var(--accent-amber);">
-                    4,1 <span style="font-size: 1rem; color: var(--text-muted); font-weight: 600;">/ 5</span>
+                    <span id="noteSatisfaction"></span> <span style="font-size: 1rem; color: var(--text-muted); font-weight: 600;">/ 5</span>
                 </div>
                 <div class="kpi-caption">Indice d'engagement certifié</div>
             </div>
@@ -535,14 +534,14 @@
             <div class="kpi-block">
                 <div class="kpi-label">Indice de performance RSE</div>
                 <div class="kpi-data" style="color: var(--accent-emerald);">
-                    78 <span style="font-size: 1rem; color: var(--text-muted); font-weight: 600;">/ 100</span>
+                    <span id="scoreRse"></span> <span style="font-size: 1rem; color: var(--text-muted); font-weight: 600;">/ 100</span>
                 </div>
                 <div class="kpi-caption">Standard ESG certifié</div>
             </div>
 
             <div class="kpi-block">
                 <div class="kpi-label">Pôles & Agences</div>
-                <div class="kpi-data">1 240</div>
+                <div class="kpi-data" id="nbAgences"></div>
                 <div class="kpi-caption">Hubs logistiques et bureaux</div>
             </div>
         </section>
@@ -554,20 +553,15 @@
                 <!-- Description -->
                 <section class="panel">
                     <div class="panel-heading">Profil exécutif</div>
-                    <p class="prose">
-                        Amazon s'articule autour de quatre axes fondamentaux : l'orientation client, la passion pour l'innovation, l'engagement envers l'excellence opérationnelle et la vision prospective à long terme. Du commerce en ligne à l'infrastructure d'hébergement mondialisé AWS, l'organisation déploie un écosystème hautement scalable centré sur l'automatisation et les architectures cloud.
+                    <p class="prose" id="description">
                     </p>
                 </section>
 
                 <!-- Avantages -->
                 <section class="panel">
                     <div class="panel-heading">Avantages & Politiques sociales</div>
-                    <div class="perks-cloud">
-                        <span class="perk-tag">💎 Actions gratuites (RSU)</span>
-                        <span class="perk-tag">🏡 Télétravail hybride structuré</span>
-                        <span class="perk-tag">🛡️ Mutuelle santé premium</span>
-                        <span class="perk-tag">🎓 Prise en charge des formations</span>
-                        <span class="perk-tag">👶 Congé parental prolongé</span>
+                    <div class="perks-cloud" id="avantages">
+                        
                     </div>
                 </section>
             </div>
@@ -580,15 +574,15 @@
                     <div class="details-list">
                         <div class="details-item">
                             <span class="details-key">Siège social</span>
-                            <span class="details-val">Seattle, États-Unis</span>
+                            <span class="details-val" id="localisation2">Seattle, États-Unis</span>
                         </div>
                         <div class="details-item">
                             <span class="details-key">Secteur d'activité</span>
-                            <span class="details-val">E-commerce / Cloud</span>
+                            <span class="details-val" id="secteur2">E-commerce / Cloud</span>
                         </div>
                         <div class="details-item">
                             <span class="details-key">Taille entreprise</span>
-                            <span class="details-val">Grande Entreprise</span>
+                            <span class="details-val" id="taille2">Grande Entreprise</span>
                         </div>
                         <div class="details-item">
                             <span class="details-key">Statut recrutement</span>
@@ -612,31 +606,12 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>ID Employé</th>
                             <th>Nom complet</th>
                             <th>Poste</th>
                             <th>Expérience</th>
                         </tr>
                     </thead>
                     <tbody id="employesTBody">
-                        <tr>
-                            <td><span class="badge-id">AMZ-9041</span></td>
-                            <td style="color: var(--text-primary); font-weight: 600;">Amina Benali</td>
-                            <td>Directrice Technique Cloud</td>
-                            <td>12 ans</td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge-id">AMZ-8842</span></td>
-                            <td style="color: var(--text-primary); font-weight: 600;">Khadija Toure</td>
-                            <td>Ingénieure Solutions Senior</td>
-                            <td>3 ans</td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge-id">AMZ-7210</span></td>
-                            <td style="color: var(--text-primary); font-weight: 600;">Marc Vasseur</td>
-                            <td>Responsable Logistique Hub</td>
-                            <td>7 ans</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
