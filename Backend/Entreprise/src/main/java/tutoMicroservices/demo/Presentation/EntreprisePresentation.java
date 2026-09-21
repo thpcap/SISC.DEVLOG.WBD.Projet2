@@ -33,6 +33,15 @@ public class EntreprisePresentation {
         return mapEntreprises(service.rechercherEntreprises(secteurs, taille, ville));
     }
 
+    @GET
+    @Path("{id}")
+    @Produces("application/json")
+    public EntrepriseDTO getEntrepriseById(@PathParam("id") int id) {
+        Entreprise entreprise = service.getEntrepriseById(id)
+                .orElseThrow(() -> new NotFoundException("Entreprise introuvable : " + id));
+        return mapEntreprises(List.of(entreprise)).get(0);
+    }
+
     private List<EntrepriseDTO> mapEntreprises(List<Entreprise> entreprisesBdd) {
         //ne pas oublier de mapper les données :)  
         EntrepriseMapper em = new EntrepriseMapper(); 

@@ -2,6 +2,7 @@ package tutoMicroservices.demo.Application;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
@@ -24,6 +25,10 @@ public class EntrepriseService {
     public List<Entreprise> getEntreprises(){
         return repo.findAll();
         //retourne toutes les entreprises contenues en bdd
+    }
+
+    public Optional<Entreprise> getEntrepriseById(int id) {
+        return repo.findById(id);
     }
 
     public List<Entreprise> rechercherEntreprises(String secteurs, String taille, String ville) {
