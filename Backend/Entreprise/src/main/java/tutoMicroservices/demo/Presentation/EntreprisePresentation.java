@@ -4,9 +4,16 @@ package tutoMicroservices.demo.Presentation;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.ws.rs.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.NotFoundException;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import tutoMicroservices.demo.Application.EmployeDAO;
 import tutoMicroservices.demo.Application.Entreprise;
 import tutoMicroservices.demo.Application.EntrepriseService;
@@ -73,5 +80,12 @@ public class EntreprisePresentation {
         Entreprise entrepriseToSave = new EntrepriseMapper().mapEntrepriseDTOToEntreprise(entrepriseDTO);
         service.creationEntreprise(entrepriseToSave);
     }
+
+    @GET
+    @Path("filtres")
+    @Produces("application/json")
+    public FiltresEntrepriseDTO getFiltres() {
+    return service.getFiltres();
+}
     
 }

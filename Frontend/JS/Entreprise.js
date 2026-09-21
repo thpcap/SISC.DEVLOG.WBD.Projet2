@@ -6,12 +6,15 @@ const TailleInput= document.getElementById("TailleInput");
 const VilleInput= document.getElementById("VilleInput");
 
 function reloadTable(){
+    //recupération des valeurs de recherche
     let secteursValue = SecteurInput.value;
     let tailleValue = TailleInput.value;
     let villeValue = VilleInput.value;
 
-    let entreprisesLink = APILink + "entreprises";
+   
 
+    let entreprisesLink = APILink + "entreprises";
+    //ajout de la recherche (si valeurs de recherche-> utilisation de l'endpoint /enreprises/search sinon symplement /entreprises)
     if (secteursValue != '' || tailleValue != '' || villeValue != '') {
 
         entreprisesLink += "/search?";
@@ -50,8 +53,18 @@ function reloadTable(){
         tableBodyEntreprise.innerHTML="";
         //reloadTable
         if(data.length!=0){
+            //ajout des lignes des entreprises dans le tableau
             data.forEach(entrreprise => {
-                console.debug(entrreprise);
+                //recupération du filtre
+                let compteSecteurs = {};
+                let compteLocalisations = {};
+                let compteTailles = {};
+
+                compteSecteurs[entrreprise.secteur]=(compteSecteurs[entrreprise.secteur]||0)+1;
+                compteLocalisations[entrreprise.localisation]=(compteLocalisations[entrreprise.localisation]||0)+1;
+                compteTailles[entrreprise.taille]=(compteTailles[entrreprise.taille]||0)+1;
+                
+                //création et ajout de la ligne
                 let row = document.createElement("tr");
                 row.innerHTML=` 
                 <td>
@@ -66,48 +79,79 @@ function reloadTable(){
                 <td class="table-action"><a class="details-link" href="`+DetailsPageLink+entrreprise.id+`">Voir les détails <span aria-hidden="true">→</span></a></td>`
                 tableBodyEntreprise.append(row);
             });
+            entreprisesNumber.innerText=data.length;
+
+            //comptage du nombre d'entreprises qui valide un filtre
+            
+            fetch(
+                APILink+"entreprises/filtres", {
+            }).then((response)=>{
+                if (!response.ok) {
+                    throw new Error(`HTTP error: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data=>{
+                console.debug(data);
+
+                // On remet les options par défaut
+
+                SecteurInput.innerHTML = '<option value="" selected>Secteur</option>';
+                TailleInput.innerHTML = '<option value="" selected>Taille</option>';
+                VilleInput.innerHTML = '<option value="" selected>Ville</option>';
+
+                //ajout des filtres de secteurs
+                data.secteurs.forEach(txt => {
+
+                    let row = document.createElement("option");
+
+                    row.value = txt;
+                    row.innerText = `${txt} (${compteSecteurs[txt]})`;
+
+                    if (txt == secteursValue) {
+                        row.selected = true;
+                    }
+
+                    SecteurInput.append(row);
+                });
+
+                //ajout des filtres de tailles
+                data.tailles.forEach(txt => {
+
+                    let row = document.createElement("option");
+
+                    row.value = txt;
+                    row.innerText = `${txt} (${compteTailles[txt]})`;
+
+                    if (txt == tailleValue) {
+                        row.selected = true;
+                    }
+
+                    TailleInput.append(row);
+                });
+                //ajout des filtres de localisation
+                data.localisations.forEach(txt => {
+
+                    let row = document.createElement("option");
+
+                    row.value = txt;
+                    row.innerText = `${txt} (${compteLocalisations[txt]})`;
+
+                    if (txt == villeValue) {
+                        row.selected = true;
+                    }
+
+                    VilleInput.append(row);
+                });
+            });
         }
-        entreprisesNumber.innerText=data.length;
-    }).catch(error=>{
-        console.error(error);
-    });
-    //ajout des filtres sur les inputs de recherche avencée
-    fetch("/Filters.json", {}).then((response)=>{
-        if (!response.ok) {
-            throw new Error(`HTTP error: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data=>{
-        // On remet les options par défaut
-        SecteurInput.innerHTML = '<option value="" selected>Secteur</option>';
-        TailleInput.innerHTML = '<option value="" selected>Taille</option>';
-        VilleInput.innerHTML = '<option value="" selected>Ville</option>';
         
-        data.secteurs.forEach(txt=>{
-            let row = document.createElement("option");
-            row.setAttribute("value",txt);
-            row.innerText=txt;
-            SecteurInput.append(row);
-        });
-
-        data.tailles.forEach(txt=>{
-            let row = document.createElement("option");
-            row.setAttribute("value",txt);
-            row.innerText=txt;
-            TailleInput.append(row);
-        });
-
-        data.localisations.forEach(txt=>{
-            let row = document.createElement("option");
-            row.setAttribute("value",txt);
-            row.innerText=txt;
-            VilleInput.append(row);
-        });
-
     }).catch(error=>{
         console.error(error);
     });
+
+    
+    
 }
 document.addEventListener("DOMContentLoaded",function(){
     reloadTable();
@@ -122,7 +166,7 @@ function filter() {
         let entreprises = tableBodyEntreprise.children;
         let nb_entreprises=0;
 
-        let regex = new RegExp(nameSearch+"*", "gmi");
+        let regex = new RegExp("*"+nameSearch+"*", "gmi");
 
         Array.from(entreprises).forEach(entreprise => {
 

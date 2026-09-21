@@ -1,30 +1,34 @@
 package tutoMicroservices.demo.Application;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tutoMicroservices.demo.Infrastucture.EntrepriseRepository;
 
-//permet à Spring d'initialiser cet objet et de le configurer
+import tutoMicroservices.demo.Infrastucture.EntrepriseRepository;
+import tutoMicroservices.demo.Presentation.FiltresEntrepriseDTO;
+
+// Permet à Spring d'initialiser cet objet et de le configurer
 @Service
 public class EntrepriseService {
 
-    //permet de récupérer l'instance de EntrepriseRepository dans Spring et de manipuler JPA à travers cette dernière
+    // Permet de récupérer l'instance de EntrepriseRepository dans Spring
     @Autowired
     private EntrepriseRepository repo;
 
-    public List<Entreprise> getEntreprises(){
+    public List<Entreprise> getEntreprises() {
         return repo.findAll();
-        //retourne toutes les entreprises contenues en bdd
     }
 
     public Optional<Entreprise> getEntrepriseById(int id) {
@@ -83,7 +87,19 @@ public class EntrepriseService {
         }
     }
 
-    public void creationEntreprise(Entreprise entreprise){
+    public void creationEntreprise(Entreprise entreprise) {
         repo.save(entreprise);
+    }
+
+    public FiltresEntrepriseDTO getFiltres() {
+        List<String> secteurs = repo.findDistinctSecteurs();
+        List<String> localisations = repo.findDistinctLocalisations();
+
+        // Récupération des tailles sous forme de String à partir de l'Enum ou du Repository
+        List<String> tailles = repo.findDistinctTailles().stream()
+                .map(Object::toString)
+                .collect(Collectors.toList());
+
+        return new FiltresEntrepriseDTO(secteurs, localisations, tailles);
     }
 }
