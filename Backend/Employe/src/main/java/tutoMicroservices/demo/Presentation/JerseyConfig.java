@@ -18,6 +18,5 @@ public class JerseyConfig extends ResourceConfig {
         //enregistre la classe où les webservices vont être exposés
         register(EmployePresentation.class);
         register(CorsFilter.class);
-
     }
 }
