@@ -481,29 +481,29 @@
         <section class="hero-banner">
             <div class="hero-main">
                 <div class="logo-box">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon Logo">
+                    <img src="" alt="Logo" id="Logo">
                 </div>
                 <div>
                     <div class="badge-line">
-                        <span class="meta-pill highlight">E-commerce & Cloud</span>
-                        <span class="meta-pill">Grande Entreprise (+500k)</span>
-                        <span class="meta-pill">Seattle, WA, États-Unis</span>
+                        <span class="meta-pill highlight" id="secteur"></span>
+                        <span class="meta-pill" id="taille"></span>
+                        <span class="meta-pill" id="localisation"></span>
                     </div>
-                    <h1 class="company-title">Amazon</h1>
+                    <h1 class="company-title"id="nom"></h1>
                     <div class="company-origins">
-                        <span>Créée le <strong>05 juillet 1994</strong></span>
+                        <span>Créée en <strong id="dateCreation"></strong></span>
                         <span>•</span>
-                        <span>Présente dans <strong>58 pays</strong></span>
+                        <span>Présente dans <strong><span id="nbPays"></span> pays</strong></span>
                     </div>
                 </div>
             </div>
 
             <div class="hero-cta">
-                <a href="https://www.aboutamazon.com" target="_blank" rel="noopener noreferrer" class="btn-ui btn-secondary">
+                <a id="siteWeb" href="" target="_blank" rel="noopener noreferrer" class="btn-ui btn-secondary">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                     Site web
                 </a>
-                <a href="https://www.amazon.jobs" target="_blank" rel="noopener noreferrer" class="btn-ui btn-primary">
+                <a id="lienPostuler" href="" target="_blank" rel="noopener noreferrer" class="btn-ui btn-primary">
                     Postuler maintenant
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                 </a>
@@ -618,7 +618,7 @@
                             <th>Expérience</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="employesTBody">
                         <tr>
                             <td><span class="badge-id">AMZ-9041</span></td>
                             <td style="color: var(--text-primary); font-weight: 600;">Amina Benali</td>
