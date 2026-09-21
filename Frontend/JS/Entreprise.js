@@ -5,7 +5,7 @@ const SecteurInput= document.getElementById("SecteurInput");
 const TailleInput= document.getElementById("TailleInput");
 const VilleInput= document.getElementById("VilleInput");
 
-function reloadTable(){
+async function reloadTable(){
     //recupération des valeurs de recherche
     let secteursValue = SecteurInput.value;
     let tailleValue = TailleInput.value;
@@ -44,7 +44,7 @@ function reloadTable(){
         }
     }
     //chargement de la liste des entreprises
-    fetch(entreprisesLink, {}).then((response)=>{
+    return fetch(entreprisesLink, {}).then((response)=>{
         if (!response.ok) {
             throw new Error(`HTTP error: ${response.status}`);
         }
@@ -83,7 +83,7 @@ function reloadTable(){
 
             //comptage du nombre d'entreprises qui valide un filtre
             
-            fetch(
+            return fetch(
                 APILink+"entreprises/filtres", {
             }).then((response)=>{
                 if (!response.ok) {
@@ -143,6 +143,7 @@ function reloadTable(){
 
                     VilleInput.append(row);
                 });
+                return data;
             });
         }
         
@@ -153,8 +154,8 @@ function reloadTable(){
     
     
 }
-document.addEventListener("DOMContentLoaded",function(){
-    reloadTable();
+document.addEventListener("DOMContentLoaded",async function(){
+    await reloadTable();
     filter();
 });
 
@@ -163,12 +164,12 @@ document.addEventListener("DOMContentLoaded",function(){
 function filter() {
     let nameSearch = entrepriseInput.value;
     if(nameSearch.length>0){
-        let entreprises = tableBodyEntreprise.children;
+        let entreprisesTr = tableBodyEntreprise.children;
         let nb_entreprises=0;
+        console.debug(entreprisesTr);
+        let regex = new RegExp(nameSearch, "gmi");
 
-        let regex = new RegExp("*"+nameSearch+"*", "gmi");
-
-        Array.from(entreprises).forEach(entreprise => {
+        Array.from(entreprisesTr).forEach(entreprise => {
 
             let nom = entreprise
                 .querySelector(".company-identity")
