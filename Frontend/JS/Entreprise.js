@@ -10,7 +10,9 @@ function reloadTable(){
     let secteursValue = SecteurInput.value;
     let tailleValue = TailleInput.value;
     let villeValue = VilleInput.value;
-
+    var compteSecteurs = {};
+    var compteLocalisations = {};
+    var compteTailles = {};
    
 
     let entreprisesLink = APILink + "entreprises";
@@ -49,6 +51,7 @@ function reloadTable(){
         return response.json();
     })
     .then(data=>{
+        
         //emptyTable
         tableBodyEntreprise.innerHTML="";
         //reloadTable
@@ -56,10 +59,7 @@ function reloadTable(){
             //ajout des lignes des entreprises dans le tableau
             data.forEach(entrreprise => {
                 //recupération du filtre
-                let compteSecteurs = {};
-                let compteLocalisations = {};
-                let compteTailles = {};
-
+                
                 compteSecteurs[entrreprise.secteur]=(compteSecteurs[entrreprise.secteur]||0)+1;
                 compteLocalisations[entrreprise.localisation]=(compteLocalisations[entrreprise.localisation]||0)+1;
                 compteTailles[entrreprise.taille]=(compteTailles[entrreprise.taille]||0)+1;
@@ -106,7 +106,7 @@ function reloadTable(){
                     let row = document.createElement("option");
 
                     row.value = txt;
-                    row.innerText = `${txt} (${compteSecteurs[txt]})`;
+                    row.innerText = `${txt} (${compteSecteurs[txt]||0})`;
 
                     if (txt == secteursValue) {
                         row.selected = true;
@@ -121,7 +121,7 @@ function reloadTable(){
                     let row = document.createElement("option");
 
                     row.value = txt;
-                    row.innerText = `${txt} (${compteTailles[txt]})`;
+                    row.innerText = `${txt} (${compteTailles[txt]||0})`;
 
                     if (txt == tailleValue) {
                         row.selected = true;
@@ -135,7 +135,7 @@ function reloadTable(){
                     let row = document.createElement("option");
 
                     row.value = txt;
-                    row.innerText = `${txt} (${compteLocalisations[txt]})`;
+                    row.innerText = `${txt} (${compteLocalisations[txt]||0})`;
 
                     if (txt == villeValue) {
                         row.selected = true;
