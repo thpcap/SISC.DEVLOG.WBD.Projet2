@@ -125,3 +125,7 @@ INSERT INTO entreprise (NOM, LOCALISATION, SECTEUR, TAILLE, ID_EMPLOYES, URL) VA
 ('EDF', 'Paris', 'Énergie', 'TGE', 98, 'https://www.google.com/s2/favicons?domain=edf.fr&sz=128'),
 ('Air France-KLM', 'Roissy-en-France', 'Transport', 'TGE', 99, 'https://www.google.com/s2/favicons?domain=airfranceklm.com&sz=128'),
 ('Decathlon', 'Villeneuve-d''Ascq', 'Distribution', 'TGE', 100,  [23502-232] 23502/23502 (Help) [42001-232]
+2026-09-21 09:34:18.156970+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ENTRPRISE" non trouvée
+Table "ENTRPRISE" not found; SQL statement:
+select * from entrprise [42102-232]
