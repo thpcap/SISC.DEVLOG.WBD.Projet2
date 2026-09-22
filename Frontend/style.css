@@ -43,7 +43,28 @@ body {
 .brand-mark { display: grid; width: 36px; height: 36px; place-items: center; color: white; background: linear-gradient(135deg, #7567ff, #4b3adb); border-radius: 10px; box-shadow: 0 6px 14px rgba(91, 76, 240, .25); }
 .nav-link { color: var(--muted); font-weight: 600; text-decoration: none; }
 .nav-link:hover, .nav-link.active { color: var(--primary); }
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+}
 
+.brand-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    min-height: 8px;
+    border-radius: 50%;
+    background: #1128ac;
+    box-shadow: 0 0 8px #1309cf;
+    flex-shrink: 0;
+}
 .page-content { flex: 1; padding-block: 72px 90px; }
 .hero { max-width: 750px; margin-bottom: 38px; }
 .eyebrow { display: inline-block; margin-bottom: 8px; color: var(--primary); font-size: .76rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
