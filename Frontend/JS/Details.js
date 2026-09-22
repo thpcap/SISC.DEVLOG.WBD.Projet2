@@ -63,8 +63,7 @@ function loadDetails(){
                 let anciennete = aujourdHui.getFullYear() - dateArrivee.getFullYear();
                 let row = document.createElement("tr");
                 row.innerHTML=`
-                        <td style="color: var(--text-primary); font-weight: 600;">${emp.nom+emp.prenom}</td>
-                        <td>Directrice Technique Cloud</td>
+                        <td style="color: var(--text-primary); font-weight: 600;">${emp.nom.toUpperCase()} ${emp.prenom}</td>
                         <td>${anciennete} An${anciennete>1?"s":""}</td>`
                 employesTBody.append(row);
             })
