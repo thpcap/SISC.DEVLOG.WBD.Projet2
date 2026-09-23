@@ -67,7 +67,7 @@ public class EntrepriseService {
         Client client = ClientBuilder.newClient();
 
         try {
-            WebTarget target = client.target("http://localhost:8081/api/employes");
+            WebTarget target = client.target("http://Employe:8081/api/employes");
 
             for (Integer id : idEmployes) {
                 target = target.queryParam("idEmployes", id);
