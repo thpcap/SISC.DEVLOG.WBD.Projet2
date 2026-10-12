@@ -1,6 +1,3 @@
-# Compose utilisé par la CI/CD (ci/deploy.sh). Il lance les JAR packagés,
-# avec une version (tag) par image pour permettre le rollback.
-# Ton docker-compose.yml d'origine (dev) n'est pas modifié.
 services:
   web:
     image: httpd:2.4
@@ -12,12 +9,20 @@ services:
 
   employe:
     image: devlog-employe:${VERSION:-latest}
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:h2:file:/data/employe
+    volumes:
+      - ./data/employe:/data
     ports:
       - "8081:8081"
     restart: unless-stopped
 
   entreprise:
     image: devlog-entreprise:${VERSION:-latest}
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:h2:file:/data/entreprise
+    volumes:
+      - ./data/entreprise:/data
     ports:
       - "8080:8080"
     restart: unless-stopped

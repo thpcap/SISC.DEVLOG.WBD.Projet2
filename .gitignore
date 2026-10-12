@@ -1,2 +1,8 @@
 ci/logs/
+ci/.deployed_versiondata/
+ci/logs/
+ci/.deployed_version
+
+data/
+ci/logs/
 ci/.deployed_version
