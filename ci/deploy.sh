@@ -34,10 +34,23 @@ for pair in "Employe:employe" "Entreprise:entreprise"; do
     || fail "docker build a échoué pour $NAME" 92
 done
 
-# 3) Lancement de la nouvelle version
+# 3) Bases de données : dossier partagé data/ (conservé entre les déploiements).
+#    Au premier déploiement, on copie les bases H2 existantes du projet.
+for pair in "Employe:employe" "Entreprise:entreprise"; do
+  DIR="${pair%%:*}"; NAME="${pair##*:}"
+  DEST="$PROJECT_DIR/data/$NAME"
+  SRC="Backend/$DIR/$NAME.mv.db"
+  mkdir -p "$DEST"
+  if [ ! -f "$DEST/$NAME.mv.db" ] && [ -f "$SRC" ]; then
+    cp "$SRC" "$DEST/$NAME.mv.db"
+    log INFO "Base $NAME initialisée depuis $SRC"
+  fi
+done
+
+# 4) Lancement de la nouvelle version
 run "${COMPOSE[@]}" up -d || fail "docker compose up a échoué" 93
 
-# 4) Test de santé : chaque URL doit répondre en HTTP avec un code < 500
+# 5) Test de santé : chaque URL doit répondre en HTTP avec un code < 500
 check_url() {
   local url="$1" i code
   for i in $(seq 1 "$HEALTH_RETRIES"); do
@@ -57,7 +70,7 @@ for url in $HEALTH_URLS; do
   check_url "$url" || { log ERROR "$url ne répond pas"; ALL_OK=0; break; }
 done
 
-# 5) Succès, ou rollback
+# 6) Succès, ou rollback
 if [ "$ALL_OK" -eq 1 ]; then
   echo "$VERSION" > "$STATE_FILE"
   log OK "Application déployée et opérationnelle (version $VERSION)"
