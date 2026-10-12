@@ -1,0 +1,6 @@
+# Image commune aux deux backends (Employe et Entreprise).
+# deploy.sh copie le jar généré sous le nom target/app.jar avant le build.
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY target/app.jar app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
