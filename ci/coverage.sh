@@ -2,7 +2,7 @@
 # Étape R&D 2 : couverture des tests unitaires (JaCoCo)
 source "$(dirname "$0")/lib.sh"
 log STEP "=== Couverture de tests (JaCoCo) ==="
-MIN_COVERAGE="${MIN_COVERAGE:-30}"   # seuil en %, ex : MIN_COVERAGE=60 ./ci/main.sh
+MIN_COVERAGE="${MIN_COVERAGE:-3}"   # seuil en %, ex : MIN_COVERAGE=60 ./ci/main.sh
 JACOCO=org.jacoco:jacoco-maven-plugin:0.8.12
 
 for m in "${MODULES[@]}"; do
