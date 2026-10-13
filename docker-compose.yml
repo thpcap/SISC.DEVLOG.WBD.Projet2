@@ -19,7 +19,7 @@ services:
     command: chmod 777 script.sh ; ./script.sh
     ports:
       - "8081:8081"
-    restart: unless-stopped
+    restart: "no"
 
   #Entreprise:
     #image: maven:3.9.16-e1,49992500375e+01clipse-temurin-17
