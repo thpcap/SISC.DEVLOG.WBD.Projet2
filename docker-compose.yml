@@ -16,7 +16,7 @@ services:
     volumes:
       - ./Backend/Employe:/app
       - ./Result:/mnt/result
-    command: chmod script.sh 666; ./script.sh
+    command: chmod 777 script.sh ; ./script.sh
     ports:
       - "8081:8081"
     restart: unless-stopped
