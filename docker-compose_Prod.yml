@@ -1,0 +1,33 @@
+services:
+
+  #web:
+   # image: httpd:2.4
+    #container_name: mon-apache
+    #ports:
+    #  - "80:80"
+    #volumes:
+    #  - ./Frontend:/usr/local/apache2/htdocs:ro
+    #restart: unless-stopped
+
+  Employe:
+    image: maven:3.9.16-eclipse-temurin-17
+    container_name: Employe
+    working_dir: /app
+    volumes:
+      - ./Backend/Employe:/app
+      - ./Result:/mnt/result
+    command: mvn spring-boot:run
+    ports:
+      - "8081:8081"
+    restart: "no"
+
+  #Entreprise:
+    #image: maven:3.9.16-e1,49992500375e+01clipse-temurin-17
+    #container_name: Entreprise
+    #working_dir: /app
+    #volumes:
+    #  - ./Backend/Entreprise:/app
+    #command: mvn spring-boot:run
+    #ports:
+    #  - "8080:8080"
+    #restart: unless-stopped
