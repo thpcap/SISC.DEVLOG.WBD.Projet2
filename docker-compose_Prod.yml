@@ -9,7 +9,7 @@ services:
     #  - ./Frontend:/usr/local/apache2/htdocs:ro
     #restart: unless-stopped
 
-  Employe:
+  Employe_PROD:
     image: maven:3.9.16-eclipse-temurin-17
     container_name: Employe
     working_dir: /app
