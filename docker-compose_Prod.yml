@@ -11,7 +11,7 @@ services:
 
   Employe_PROD:
     image: maven:3.9.16-eclipse-temurin-17
-    container_name: Employe
+    container_name: Employe_PROD
     working_dir: /app
     volumes:
       - ./Backend/Employe:/app
