@@ -18,7 +18,7 @@ services:
       - ./Result:/mnt/result
     command: mvn spring-boot:run
     ports:
-      - "8081:8081"
+      - "8081:8088"
     restart: "no"
 
   #Entreprise:
